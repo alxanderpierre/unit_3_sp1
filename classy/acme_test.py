@@ -29,9 +29,13 @@ class AcmeProductTests(unittest.TestCase):
 
 class AcmeReportTest(unittest.TestCase):
 
-    def test_default_num_products(self):
+    def test_legal_name(self):
         prod = generate_products(name,flammability, price, weight, num_products=1)
         self.assertIn(prod[0].name, name)
+
+    def test_default_num_products(self):
+        prod=generate_products(name, flammability, price, weight)
+        self.assertEqual(len(prod), 30)
 
 if __name__ == '__main__':
     unittest.main()
