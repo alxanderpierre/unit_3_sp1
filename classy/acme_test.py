@@ -1,6 +1,12 @@
 import unittest
 from acme import Product
-from acme_report import generate_products, ADJECTIVES, NOUNS
+from acme_report import generate_products, adjective, noun
+import random
+
+adjective = random.sample(['Awesome', 'Shiny', 'Impressive', 'Portable', 'Improved'], 1)
+noun = random.sample(['Anvil', 'Catapult', 'Disguise', 'Mousetrap', 'Hangers'], 1)
+name = adjective[0] + " " + noun[0]
+
 
 class AcmeProductTests(unittest.TestCase):
     """Making sure Acme products are the tops!"""
@@ -9,18 +15,23 @@ class AcmeProductTests(unittest.TestCase):
         prod = Product('Test Product')
         self.assertEqual(prod.price, 10)
 
-    def test_default_explosiveness(self):
-        """ Test default explosivenenss"""
-        prod = Product('Test Product')
-        self.assertLess(prod.flammability, 10)
+    def test_defaults(self):
+        """Test Default values as shown"""
+        prod=Product("Test Product")
+        self.assertEqual(prod.flammability, 0.5)
+        self.assertEqual(prod.weight, 20.0)
+        self.assertEqual(prod.name, "Test prod")
 
-    def test_default_stealability(self):
-        """test default stealability"""
+    def test_stealability(self):
+        """test stealability"""
         prod = Product('Test Product')
         self.assertLessEqual(prod.stealability, .05)
 
 class AcmeReportTest(unittest.TestCase):
 
+    def test_default_num_products(self):
+        prod = generate_products(name,flammability, price, weight, num_products=1)
+        self.assertIn(prod[0].name, name)
 
 if __name__ == '__main__':
     unittest.main()
@@ -39,7 +50,7 @@ if __name__ == '__main__':
 #  slightly different things running on all of them. How could containers help us
 #  improve this situation?
 
-# ANSWER: Containers can be very very very useful in situations like these. Using 
+# ANSWER: Containers can be very very very useful in situations like these. Using
 # applications like docker allows a person to share their code with other and
 # it will automatically import the correct dependencies based on the machine it
-# is going to.
+# is going
