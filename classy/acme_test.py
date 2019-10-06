@@ -24,7 +24,7 @@ class AcmeProductTests(unittest.TestCase):
 
     def test_stealability(self):
         """test stealability"""
-        prod = generate_products(name,price,weight,flammability,num_products= 4)
+        prod = generate_products(name,flammability,price,weight,num_products= 4)
         steal = ["Not so stealable.", "kinda stealable.", "Very stealable."]
         for x in prod:
             stealability = x.stealability()
