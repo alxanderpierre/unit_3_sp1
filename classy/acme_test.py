@@ -24,8 +24,11 @@ class AcmeProductTests(unittest.TestCase):
 
     def test_stealability(self):
         """test stealability"""
-        prod = Product('Test Product')
-        self.assertLessEqual(prod.stealability, .05)
+        prod = generate_products(name,price,weight,flammability,num_products= 4)
+        steal = ["Not so stealable.", "kinda stealable.", "Very stealable."]
+        for x in prod:
+            stealability = x.stealability()
+            self.assertIn(stealability, steal)
 
 class AcmeReportTest(unittest.TestCase):
 
