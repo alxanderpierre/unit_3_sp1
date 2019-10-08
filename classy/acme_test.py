@@ -3,8 +3,8 @@ from acme import Product
 from acme_report import generate_products, adjective, noun
 import random
 
-adj = random.sample(['Awesome', 'Shiny', 'Impressive','Portable', 'Improved'],1)
-noun = random.sample(['Anvil', 'Catapult' ,'Disguise' ,'Mousetrap', 'Hanger'],1)
+adj = random.sample(['Awesome', 'Shiny', 'Impressive', 'Portable', 'Improved'], 1)
+noun = random.sample(['Anvil', 'Catapult', 'Disguise', 'Mousetrap', 'Hanger'], 1)
 
 
 name = adjective[0] + " " + noun[0]
@@ -28,14 +28,14 @@ class AcmeProductTests(unittest.TestCase):
         """ Test default values as shown"""
 
         prod = Product("Test prod")
-        self.assertEqual(prod.flammability, 0.5)
         self.assertEqual(prod.weight, 20)
+        self.assertEqual(prod.flammability, .5)
         self.assertEqual(prod.name, "Test prod")
 
     def test_steal(self):
         """Test stealability of a product"""
 
-        prod = generate_products(name,price,weight,flammability,num_products = 5)
+        prod = generate_products(name,price,weight,flammability,num_products= 5)
         steal = ["Not so stealable.", "kinda stealable.", "Very stealable."]
         for p in prod:
             stealability = p.stealability()
@@ -44,7 +44,7 @@ class AcmeProductTests(unittest.TestCase):
 class AcmeReportTests(unittest.TestCase):
 
     def test_default_num_products(self):
-        prod = generate_products(name,flammability,price,weight,)
+        prod = generate_products(name,price,weight,flammability)
         self.assertEqual(len(prod), 30)
 
     def test_legal_names(self):

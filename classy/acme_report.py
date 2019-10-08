@@ -16,12 +16,12 @@ price = random.randint(5,100)
 weight = random.randint(5,100)
 
 
-def generate_products(name,flamability,price,weight,num_products= 30):
+def generate_products(name,price,weight,flamability,num_products= 30):
 
     prod = []
 
     for i in range(num_products):
-        prod.append(Product(name,flamability,price,weight,))
+        prod.append(Product(name,price,weight,flamability))
 
     return prod
 
