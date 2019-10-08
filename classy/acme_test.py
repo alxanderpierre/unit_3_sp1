@@ -3,42 +3,55 @@ from acme import Product
 from acme_report import generate_products, adjective, noun
 import random
 
-adjective = random.sample(['Awesome', 'Shiny', 'Impressive', 'Portable', 'Improved'], 1)
-noun = random.sample(['Anvil', 'Catapult', 'Disguise', 'Mousetrap', 'Hangers'], 1)
+adj = random.sample(['Awesome', 'Shiny', 'Impressive','Portable', 'Improved'],1)
+noun = random.sample(['Anvil', 'Catapult' ,'Disguise' ,'Mousetrap', 'Hanger'],1)
+
+
 name = adjective[0] + " " + noun[0]
+
+
+flammability = random.uniform(0.0,2.5)
+price = random.randint(5,100)
+weight = random.randint(5,100)
 
 
 class AcmeProductTests(unittest.TestCase):
     """Making sure Acme products are the tops!"""
+
     def test_default_product_price(self):
         """Test default product price being 10."""
+
         prod = Product('Test Product')
         self.assertEqual(prod.price, 10)
 
     def test_defaults(self):
-        """Test Default values as shown"""
-        prod=Product("Test Product")
+        """ Test default values as shown"""
+
+        prod = Product("Test prod")
         self.assertEqual(prod.flammability, 0.5)
-        self.assertEqual(prod.weight, 20.0)
+        self.assertEqual(prod.weight, 20)
         self.assertEqual(prod.name, "Test prod")
 
-    def test_stealability(self):
-        """test stealability"""
-        prod = generate_products(name,flammability,price,weight,num_products= 4)
+    def test_steal(self):
+        """Test stealability of a product"""
+
+        prod = generate_products(name,price,weight,flammability,num_products = 5)
         steal = ["Not so stealable.", "kinda stealable.", "Very stealable."]
-        for x in prod:
-            stealability = x.stealability()
+        for p in prod:
+            stealability = p.stealability()
             self.assertIn(stealability, steal)
 
-class AcmeReportTest(unittest.TestCase):
-
-    def test_legal_name(self):
-        prod = generate_products(name,flammability, price, weight, num_products=1)
-        self.assertIn(prod[0].name, name)
+class AcmeReportTests(unittest.TestCase):
 
     def test_default_num_products(self):
-        prod=generate_products(name, flammability, price, weight)
+        prod = generate_products(name,flammability,price,weight,)
         self.assertEqual(len(prod), 30)
+
+    def test_legal_names(self):
+        prod = generate_products(name,price,weight,flammability,num_products = 1)
+        self.assertIn(prod[0].name, name)
+
+
 
 if __name__ == '__main__':
     unittest.main()

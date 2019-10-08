@@ -1,14 +1,13 @@
 import random
-import unittest
-
 
 class Product:
+
     def __init__(self, name= "A Cool Toy"):
         self.name = name
         self.price = 10
         self.weight = 20
         self.flammability = 0.5
-        self.identifier = random.randint(999999, 9999999)
+        self.identifier = random.randint(1000000,10000000)
 
     def stealability(self):
         steal_ratio = self.price / self.weight
